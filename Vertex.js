@@ -11,6 +11,7 @@ function Vertex(name, x, y, size) {
   this.lit = false;
   this.touched = false;
   this.adjacentVertices = [];
+  this.edgeList = [];
 
   // Constructor
   {
@@ -20,8 +21,25 @@ function Vertex(name, x, y, size) {
   }
 
   this.addAdjacent = function(adj) {
+    // Add to adjacency lists
     this.adjacentVertices.push(adj);
     adj.adjacentVertices.push(this);
+
+    // Calculate weight of edge
+    var x = this.x - adj.x;
+    var y = this.y - adj.y;
+    var edgeWeight = Math.sqrt(x*x + y*y);
+
+    // Create edge for each
+    var thisEdge = new Edge(this, adj, edgeWeight);
+    var thatEdge = new Edge(adj, this, edgeWeight);
+
+    this.addEdge(thisEdge);
+    adj.addEdge(thatEdge);
+  }
+
+  this.addEdge = function(edge) {
+    this.edgeList.push(edge);
   }
 
   this.draw = function() {
