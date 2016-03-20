@@ -83,7 +83,12 @@ function Dijkstra(listOfVertices, debug) {
         }
       }
 
-      if(vertex.name === end.name){
+      // If we are only interested in a shortest
+      // path between vertices source and target,
+      // we can terminate the search after line 13
+      //if u = target. Now we can read the shortest
+      //path from source to target by reverse iteration:
+      if (vertex.name === end.name) {
         print("End search at " + end.name);
         return listOfVertices;
       }
