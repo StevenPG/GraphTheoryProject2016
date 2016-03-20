@@ -13,6 +13,12 @@ function Vertex(name, x, y, size) {
   this.adjacentVertices = [];
   this.edgeList = [];
 
+  // The current distance saved locally
+  this.distance;
+
+  // Host the previous node in the list
+  this.previous;
+
   // Constructor
   {
     this.x = x;

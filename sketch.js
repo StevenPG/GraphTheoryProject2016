@@ -19,6 +19,7 @@ function setup() {
   // Create buttons
   DijkstraButton = createButton("Dijkstra's Algorithm");
   DijkstraButton.position(w / 1.107692308692308, h / 1.091666666666667);
+  DijkstraButton.mousePressed(runDijkstraAlgorithm);
 
   // Assign adjacentVertices
   LytleHall = new Vertex("LytleHall", w / 4.96551724137931, h / 1.222429906542056, vertexSize);
@@ -76,6 +77,7 @@ function setup() {
 
   LytleJunction.addAdjacent(AF_LytleJunction);
   LytleJunction.addAdjacent(Lytle_DeFranJunction);
+  LytleJunction.addAdjacent(LytleFrontLot);
 
   Lytle_DeFranJunction.addAdjacent(DeFrancesco_South);
   Lytle_DeFranJunction.addAdjacent(Beekey_DeFranJunction);
@@ -128,6 +130,14 @@ function draw() {
   drawPoints();
 }
 
+// Runs on button presss
+function runDijkstraAlgorithm() {
+  print("Run Dijkstra algorithm");
+  algorithm = new Dijkstra(vertices);
+  algorithm.findShortestPath();
+}
+
+// Draw each of the points onto the image
 function drawPoints() {
   // Draw points
   LytleHall.draw();
