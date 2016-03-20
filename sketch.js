@@ -133,8 +133,8 @@ function draw() {
 // Runs on button presss
 function runDijkstraAlgorithm() {
   print("Run Dijkstra algorithm");
-  algorithm = new Dijkstra(vertices);
-  algorithm.findShortestPath();
+  algorithm = new Dijkstra(vertices, true);
+  algorithm.findShortestPath(LytleHall, AF);
 }
 
 // Draw each of the points onto the image
