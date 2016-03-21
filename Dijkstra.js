@@ -23,6 +23,7 @@ function Dijkstra(listOfVertices, debug) {
     }
 
     shortestPathList = this.getShortest(endVertex);
+
     if (debug) {
       var pathLength = 0;
 
@@ -45,6 +46,7 @@ function Dijkstra(listOfVertices, debug) {
 
   this.getShortest = function(endNode) {
     S = [];
+    throw new Error("Pausing execution");
     while (endNode.previous != null) {
       S.push(endNode.previous);
       endNode = endNode.previous;
@@ -100,22 +102,23 @@ function Dijkstra(listOfVertices, debug) {
       //   16          for each neighbor v of u:           // where v is still in Q.
       neighborList = vertex.adjacentVertices;
       for (var i = 0; i < neighborList.length; i++) {
-        if (!this.contains(Q, neighborList[i])) {
-          print("Already touched " + neighborList[i].name);
-          continue;
-        } else {
-          //   17              alt ← dist[u] + length(u, v)
-          var x = vertex.x - neighborList[i].x;
-          var y = vertex.y - neighborList[i].y;
-          var edgeWeight = Math.sqrt(x * x + y * y);
-          alt = vertex.distance + edgeWeight;
-          //   18              if alt < dist[v]:               // A shorter path to v has been found
-          if (alt < neighborList[i].distance) {}
-          //   19                  dist[v] ← alt
-          neighborList[i].distance = alt;
-          //   20                  prev[v] ← u
-          neighborList[i].previous = vertex;
-        }
+        //if (this.contains(Q, neighborList[i])) {
+        //   17              alt ← dist[u] + length(u, v)
+        var x = vertex.x - neighborList[i].x;
+        var y = vertex.y - neighborList[i].y;
+        var edgeWeight = Math.sqrt(x * x + y * y);
+        print("Edge length: " + edgeWeight + " of " + vertex.name + " to " + neighborList[i].name);
+        alt = vertex.distance + edgeWeight;
+        //   18              if alt < dist[v]:               // A shorter path to v has been found
+        if (alt < neighborList[i].distance) {}
+        //   19                  dist[v] ← alt
+        neighborList[i].distance = alt;
+        //   20                  prev[v] ← u
+        neighborList[i].previous = vertex;
+        //} else {
+        //    print("Already touched " + neighborList[i].name);
+        //  continue;
+        //}
       }
     }
     //   21
@@ -159,9 +162,7 @@ function Dijkstra(listOfVertices, debug) {
       //   16          for each neighbor v of u:           // where v is still in Q.
       neighborList = vertex.adjacentVertices;
       for (var i = 0; i < neighborList.length; i++) {
-        if (!this.contains(Q, neighborList[i])) {
-          continue;
-        } else {
+        if (this.contains(Q, neighborList[i])) {
           print("Current node: " + vertex.name + " marking " + neighborList[i].name);
           //   17              alt ← dist[u] + length(u, v)
           var x = vertex.x - neighborList[i].x;
@@ -176,6 +177,8 @@ function Dijkstra(listOfVertices, debug) {
           neighborList[i].distance = alt;
           //   20                  prev[v] ← u
           neighborList[i].previous = vertex;
+        } else {
+          continue;
         }
       }
     }
