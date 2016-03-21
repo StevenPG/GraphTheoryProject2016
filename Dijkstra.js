@@ -28,7 +28,6 @@ function Dijkstra(listOfVertices, debug) {
       var pathLength = 0;
 
       for (i = 0; i < shortestPathList.length; i++) {
-        print("Shortest path: " + shortestPathList[i].name + ": " + shortestPathList[i].distance);
         pathLength += shortestPathList[i].distance;
       }
       print("Path length: " + pathLength);
@@ -47,10 +46,16 @@ function Dijkstra(listOfVertices, debug) {
   this.getShortest = function(endNode) {
     S = [];
     while (endNode.previous != null) {
-      S.push(endNode.previous);
+      S.push(endNode);
+      print(endNode.name);
+      endNode.lit = true;
       endNode = endNode.previous;
     }
+
+    print(endNode.name);
+
     S.push(endNode);
+
     return S;
   }
 
@@ -81,7 +86,6 @@ function Dijkstra(listOfVertices, debug) {
       for (var i = 0; i < Q.length; i++) {
         if (Q[i].distance < minDistance) {
           minDistance = Q[i].distance;
-          print("Min Distance: " + minDistance + " was " + Q[i].name);
           vertex = Q[i];
         }
       }
@@ -98,7 +102,7 @@ function Dijkstra(listOfVertices, debug) {
           var x = vertex.x - neighborList[i].x;
           var y = vertex.y - neighborList[i].y;
           var edgeWeight = Math.sqrt(x * x + y * y);
-          print("Edge length: " + edgeWeight + " of " + vertex.name + " to " + neighborList[i].name);
+          vertex.touched = true;
           alt = vertex.distance + edgeWeight;
           //   18              if alt < dist[v]:               // A shorter path to v has been found
           if (alt < neighborList[i].distance) {}
@@ -106,8 +110,13 @@ function Dijkstra(listOfVertices, debug) {
           neighborList[i].distance = alt;
           //   20                  prev[v] ← u
           neighborList[i].previous = vertex;
+
+          if (neighborList[i].name === end.name) {
+            return;
+          }
+
         } else {
-          print("Already touched " + neighborList[i].name);
+          // Already touched
           continue;
         }
       }

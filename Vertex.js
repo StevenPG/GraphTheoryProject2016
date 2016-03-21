@@ -34,7 +34,7 @@ function Vertex(name, x, y, size) {
     // Calculate weight of edge
     var x = this.x - adj.x;
     var y = this.y - adj.y;
-    var edgeWeight = Math.sqrt(x*x + y*y);
+    var edgeWeight = Math.sqrt(x * x + y * y);
 
     // Create edge for each
     var thisEdge = new Edge(this, adj, edgeWeight);
@@ -49,38 +49,31 @@ function Vertex(name, x, y, size) {
   }
 
   this.draw = function() {
-    // Draw a line between adjacentVertices
-    if (this.adjacentVertices.length > 0) {
-      for (i = 0; i < this.adjacentVertices.length; i++) {
-        var adj = this.adjacentVertices[i];
-        stroke(255);
-        strokeWeight(3);
+
+    fill('white');
+    ellipse(this.x, this.y, this.size, this.size);
+    for (i = 0; i < this.adjacentVertices.length; i++) {
+      var adj = this.adjacentVertices[i];
+      stroke(255);
+      strokeWeight(1);
+      line(this.x, this.y, adj.x, adj.y);
+    }
+
+
+    if (this.lit) {
+      fill('green');
+      ellipse(this.x, this.y, this.size, this.size);
+      if (this.previous != null) {
+        var adj = this.previous;
+        stroke(0, 255, 0);
+        strokeWeight(2);
         line(this.x, this.y, adj.x, adj.y);
       }
-    }
-
-    if (!this.touched) {
-      fill('white');
-      ellipse(this.x, this.y, this.size, this.size);
-      return;
     } else {
-
-      if (this.lit) {
-        fill('green');
-        ellipse(this.x, this.y, this.size, this.size);
-        return;
-      } else {
-        fill('red');
-        ellipse(this.x, this.y, this.size, this.size);
-        return;
-      }
-
-      if (this.touched) {
-        fill('white');
-        ellipse(this.x, this.y, this.size, this.size);
-        return;
-      }
+      fill('red');
+      ellipse(this.x, this.y, this.size, this.size);
     }
+
   }
 
   this.touch = function() {
