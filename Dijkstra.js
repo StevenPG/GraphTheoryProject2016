@@ -46,7 +46,6 @@ function Dijkstra(listOfVertices, debug) {
 
   this.getShortest = function(endNode) {
     S = [];
-    throw new Error("Pausing execution");
     while (endNode.previous != null) {
       S.push(endNode.previous);
       endNode = endNode.previous;
@@ -81,18 +80,10 @@ function Dijkstra(listOfVertices, debug) {
       var minDistance = Number.MAX_VALUE;
       for (var i = 0; i < Q.length; i++) {
         if (Q[i].distance < minDistance) {
+          minDistance = Q[i].distance;
+          print("Min Distance: " + minDistance + " was " + Q[i].name);
           vertex = Q[i];
         }
-      }
-
-      // If we are only interested in a shortest
-      // path between vertices source and target,
-      // we can terminate the search after line 13
-      //if u = target. Now we can read the shortest
-      //path from source to target by reverse iteration:
-      if (vertex.name === end.name) {
-        print("End search at " + end.name);
-        return listOfVertices;
       }
 
       //   14          remove u from Q
@@ -102,23 +93,23 @@ function Dijkstra(listOfVertices, debug) {
       //   16          for each neighbor v of u:           // where v is still in Q.
       neighborList = vertex.adjacentVertices;
       for (var i = 0; i < neighborList.length; i++) {
-        //if (this.contains(Q, neighborList[i])) {
-        //   17              alt ← dist[u] + length(u, v)
-        var x = vertex.x - neighborList[i].x;
-        var y = vertex.y - neighborList[i].y;
-        var edgeWeight = Math.sqrt(x * x + y * y);
-        print("Edge length: " + edgeWeight + " of " + vertex.name + " to " + neighborList[i].name);
-        alt = vertex.distance + edgeWeight;
-        //   18              if alt < dist[v]:               // A shorter path to v has been found
-        if (alt < neighborList[i].distance) {}
-        //   19                  dist[v] ← alt
-        neighborList[i].distance = alt;
-        //   20                  prev[v] ← u
-        neighborList[i].previous = vertex;
-        //} else {
-        //    print("Already touched " + neighborList[i].name);
-        //  continue;
-        //}
+        if (this.contains(Q, neighborList[i])) {
+          //   17              alt ← dist[u] + length(u, v)
+          var x = vertex.x - neighborList[i].x;
+          var y = vertex.y - neighborList[i].y;
+          var edgeWeight = Math.sqrt(x * x + y * y);
+          print("Edge length: " + edgeWeight + " of " + vertex.name + " to " + neighborList[i].name);
+          alt = vertex.distance + edgeWeight;
+          //   18              if alt < dist[v]:               // A shorter path to v has been found
+          if (alt < neighborList[i].distance) {}
+          //   19                  dist[v] ← alt
+          neighborList[i].distance = alt;
+          //   20                  prev[v] ← u
+          neighborList[i].previous = vertex;
+        } else {
+          print("Already touched " + neighborList[i].name);
+          continue;
+        }
       }
     }
     //   21
