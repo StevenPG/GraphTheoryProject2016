@@ -134,7 +134,7 @@ function draw() {
 function runDijkstraAlgorithm() {
   print("Run Dijkstra algorithm");
   algorithm = new Dijkstra(vertices, false);
-  algorithm.findShortestPath(Grim, LibraryFront);
+  algorithm.findShortestPath(LytleHall, SharadinFront);
 }
 
 // Draw each of the points onto the image
