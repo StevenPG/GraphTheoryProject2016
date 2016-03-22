@@ -58,6 +58,10 @@ function Vertex(name, x, y, size) {
       text(this.name, w / 1.048035, h / 1.329435);
     }
 
+    if(this.selectedSecond){
+      text(this.name, w/1.041968, h/1.270019);
+    }
+
     fill('white');
     ellipse(this.x, this.y, this.size, this.size);
     for (i = 0; i < this.adjacentVertices.length; i++) {
