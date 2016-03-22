@@ -13,6 +13,10 @@ function Vertex(name, x, y, size) {
   this.adjacentVertices = [];
   this.edgeList = [];
 
+  // Selection attributes, only two nodes can be selected at a time
+  this.selectedFirst;
+  this.selectedSecond;
+
   // The current distance saved locally
   this.distance;
 
@@ -49,6 +53,10 @@ function Vertex(name, x, y, size) {
   }
 
   this.draw = function() {
+
+    if (this.selectedFirst) {
+      text(this.name, w / 1.048035, h / 1.329435);
+    }
 
     fill('white');
     ellipse(this.x, this.y, this.size, this.size);
@@ -87,5 +95,16 @@ function Vertex(name, x, y, size) {
   this.dim = function() {
     this.lit = false;
   }
+
+  this.checkForClick = function(mouseX, mouseY) {
+    if (mouseX > this.x - this.size && mouseY < this.y + this.size &&
+      mouseX < this.x + this.size && mouseY > this.y - this.size) {
+      print("Selected " + this.name);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 }

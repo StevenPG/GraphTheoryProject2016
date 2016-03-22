@@ -2,38 +2,45 @@ function setup() {
 
   // Create the canvas to be drawn on
   createCanvas(windowWidth, windowHeight);
-/**
-  if(windowWidth < 490){
-    w = 480;
-    h = 270;
-  } else if(windowWidth < 641){
-    w = 640;
-    h = 360;
-  } else if(windowWidth < 750){
-    w = 720;
-    h = 405;
-  } else if(windowWidth < 1441){
-    w = 1440;
-    h = 810;
-  } else if(windowWidth < 1921){
-    w = 1920;
-    h = 1081;
-  } else if(windowWidth < 2049){
-    w = 2048;
-    h = 1152;
-  } else {
-    w = windowWidth;
-    h = windowHeight;
-  }**/
+  /**
+    if(windowWidth < 490){
+      w = 480;
+      h = 270;
+    } else if(windowWidth < 641){
+      w = 640;
+      h = 360;
+    } else if(windowWidth < 750){
+      w = 720;
+      h = 405;
+    } else if(windowWidth < 1441){
+      w = 1440;
+      h = 810;
+    } else if(windowWidth < 1921){
+      w = 1920;
+      h = 1081;
+    } else if(windowWidth < 2049){
+      w = 2048;
+      h = 1152;
+    } else {
+      w = windowWidth;
+      h = windowHeight;
+    }**/
 
   w = windowWidth;
   h = windowHeight;
+
+  print(w);
+  print(h);
 
   // Define image
   backgroundImage = loadImage("assets/GraphTheoryImage.jpg");
 
   // Const fields
   var vertexSize = w / 144;
+
+  // Only 2 selections, held globally
+  selectedFirst = null;
+  selectedSecond = null;
 
   // Hold all vertices
   vertices = [];
@@ -67,6 +74,11 @@ function setup() {
   Beekey_DeFranJunction = new Vertex("Beekey_DeFranJunction", w / 6.050420168, h / 1.776271186, vertexSize);
   DeFran_RickenbachJunction = new Vertex("DeFran_RickenbachJunction", w / 4.736842105, h / 1.940740741, vertexSize);
   RickenbachFront = new Vertex("RickenbachFront", w / 4.914675768, h / 2.096, vertexSize);
+  A2 = new Vertex("A2", w / 6.153846, h / 2.327645, vertexSize);
+  DeFrancesco_EastJunction = new Vertex("DeFrancesco_EastJunction", w / 4.630225, h / 1.853261, vertexSize);
+  Library_Sub_SharadinJunction = new Vertex("Library_Sub_SharadinJunction", w / 3.044397, h / 1.905028, vertexSize);
+  BoehmSteps = new Vertex("BoehmSteps", w / 2.823529, h / 1.485839, vertexSize);
+  GrimPond = new Vertex("GrimPond", w / 2.818004, h / 1.394683, vertexSize);
 
   // Build vertex list
   vertices.push(LytleHall);
@@ -92,55 +104,51 @@ function setup() {
   vertices.push(Beekey_DeFranJunction);
   vertices.push(DeFran_RickenbachJunction);
   vertices.push(RickenbachFront);
-
+  vertices.push(A2);
+  vertices.push(DeFrancesco_EastJunction)
+  vertices.push(Library_Sub_SharadinJunction)
+  vertices.push(BoehmSteps)
+  vertices.push(GrimPond)
 
   // Build adjacentVertices (Goes both ways)
   LytleHall.addAdjacent(LytleJunction);
-
   LytleJunction.addAdjacent(AF_LytleJunction);
   LytleJunction.addAdjacent(Lytle_DeFranJunction);
   LytleJunction.addAdjacent(LytleFrontLot);
-
   Lytle_DeFranJunction.addAdjacent(DeFrancesco_South);
   Lytle_DeFranJunction.addAdjacent(Beekey_DeFranJunction);
-
   DeFrancesco_South.addAdjacent(DeFran_LibJunction);
-
   DeFran_LibJunction.addAdjacent(AF_LytleJunction);
-
   AF_LytleJunction.addAdjacent(AF);
-
   AF.addAdjacent(Grim_BoehmJunction);
   AF.addAdjacent(LibraryFront);
-
-  Grim_BoehmJunction.addAdjacent(Grim);
   Grim_BoehmJunction.addAdjacent(Boehm_Front);
   Grim_BoehmJunction.addAdjacent(LibraryFront);
-
   LibraryFront.addAdjacent(Sub_Front);
   LibraryFront.addAdjacent(Sub_BoehmJunction);
   LibraryFront.addAdjacent(BoehmRear);
-  LibraryFront.addAdjacent(SharadinFront);
-
   BoehmRear.addAdjacent(Boehm_Front);
   BoehmRear.addAdjacent(Sub_BoehmJunction);
-
-  Sub_BoehmJunction.addAdjacent(Sharadin_SubJunction);
-
   Sharadin_SubJunction.addAdjacent(Sub_Front);
   Sharadin_SubJunction.addAdjacent(SharadinFront);
-
   BeekeyFront.addAdjacent(Beekey_DeFranJunction);
-
   Beekey_DeFranJunction.addAdjacent(DeFrancesco_North);
-
   DeFrancesco_North.addAdjacent(DeFran_RickenbachJunction);
-
   DeFran_RickenbachJunction.addAdjacent(RickenbachFront);
-  DeFran_RickenbachJunction.addAdjacent(DeFran_LibJunction);
   DeFran_RickenbachJunction.addAdjacent(Sub_Front);
-
-  DeFrancesco_East.addAdjacent(Sub_Front);
+  DeFran_RickenbachJunction.addAdjacent(DeFrancesco_EastJunction);
+  DeFrancesco_EastJunction.addAdjacent(DeFrancesco_East);
+  DeFrancesco_EastJunction.addAdjacent(Sub_Front);
+  DeFrancesco_EastJunction.addAdjacent(DeFran_LibJunction);
+  SharadinFront.addAdjacent(Library_Sub_SharadinJunction);
+  Library_Sub_SharadinJunction.addAdjacent(LibraryFront);
+  Library_Sub_SharadinJunction.addAdjacent(Sharadin_SubJunction);
+  Library_Sub_SharadinJunction.addAdjacent(Sub_BoehmJunction);
+  Boehm_Front.addAdjacent(BoehmSteps);
+  BoehmSteps.addAdjacent(GrimPond);
+  Grim_BoehmJunction.addAdjacent(GrimPond);
+  GrimPond.addAdjacent(Grim);
+  A2.addAdjacent(DeFrancesco_North);
 }
 
 function draw() {
@@ -153,9 +161,102 @@ function draw() {
 
 // Runs on button presss
 function runDijkstraAlgorithm() {
-  print("Run Dijkstra algorithm");
-  algorithm = new Dijkstra(vertices, true);
-  algorithm.findShortestPath(LytleHall, SharadinFront);
+  if (selectedFirst == null || selectedSecond == null) {
+    print("Need to select nodes");
+  } else {
+    print("Run Dijkstra algorithm");
+    algorithm = new Dijkstra(vertices, false);
+    algorithm.findShortestPath(selectedFirst, selectedSecond);
+  }
+}
+
+function mouseClicked() {
+
+  // Start first click block
+  if (selectedFirst == null) {
+    LytleHall.selectedFirst = LytleHall.checkForClick(mouseX, mouseY);
+    LytleJunction.selectedFirst = LytleJunction.checkForClick(mouseX, mouseY);
+    AF.selectedFirst = AF.checkForClick(mouseX, mouseY);
+    AF_LytleJunction.selectedFirst = AF_LytleJunction.checkForClick(mouseX, mouseY);
+    DeFrancesco_South.selectedFirst = DeFrancesco_South.checkForClick(mouseX, mouseY);
+    DeFrancesco_East.selectedFirst = DeFrancesco_East.checkForClick(mouseX, mouseY);
+    DeFrancesco_North.selectedFirst = DeFrancesco_North.checkForClick(mouseX, mouseY);
+    DeFran_LibJunction.selectedFirst = DeFran_LibJunction.checkForClick(mouseX, mouseY);
+    Grim.selectedFirst = Grim.checkForClick(mouseX, mouseY);
+    Grim_BoehmJunction.selectedFirst = Grim_BoehmJunction.checkForClick(mouseX, mouseY);
+    Boehm_Front.selectedFirst = Boehm_Front.checkForClick(mouseX, mouseY);
+    Lytle_DeFranJunction.selectedFirst = Lytle_DeFranJunction.checkForClick(mouseX, mouseY);
+    LibraryFront.selectedFirst = LibraryFront.checkForClick(mouseX, mouseY);
+    Sub_BoehmJunction.selectedFirst = Sub_BoehmJunction.checkForClick(mouseX, mouseY);
+    BoehmRear.selectedFirst = BoehmRear.checkForClick(mouseX, mouseY);
+    SharadinFront.selectedFirst = SharadinFront.checkForClick(mouseX, mouseY);
+    Sub_Front.selectedFirst = Sub_Front.checkForClick(mouseX, mouseY);
+    Sharadin_SubJunction.selectedFirst = Sharadin_SubJunction.checkForClick(mouseX, mouseY);
+    LytleFrontLot.selectedFirst = LytleFrontLot.checkForClick(mouseX, mouseY);
+    BeekeyFront.selectedFirst = BeekeyFront.checkForClick(mouseX, mouseY);
+    Beekey_DeFranJunction.selectedFirst = Beekey_DeFranJunction.checkForClick(mouseX, mouseY);
+    DeFran_RickenbachJunction.selectedFirst = DeFran_RickenbachJunction.checkForClick(mouseX, mouseY);
+    RickenbachFront.selectedFirst = RickenbachFront.checkForClick(mouseX, mouseY);
+    A2.selectedFirst = A2.checkForClick(mouseX, mouseY);
+    DeFrancesco_EastJunction.selectedFirst = DeFrancesco_EastJunction.checkForClick(mouseX, mouseY);
+    Library_Sub_SharadinJunction.selectedFirst = Library_Sub_SharadinJunction.checkForClick(mouseX, mouseY);
+    BoehmSteps.selectedFirst = BoehmSteps.checkForClick(mouseX, mouseY);
+    GrimPond.selectedFirst = GrimPond.checkForClick(mouseX, mouseY);
+
+    for (i = 0; i < vertices.length; i++) {
+      if (vertices[i].selectedFirst) {
+        selectedFirst = vertices[i];
+      }
+    }
+  }
+  // End first click block
+
+  // Start second click block
+  if (selectedFirst != null && selectedSecond == null) {
+    LytleHall.selectedSecond = LytleHall.checkForClick(mouseX, mouseY);
+    LytleJunction.selectedSecond = LytleJunction.checkForClick(mouseX, mouseY);
+    AF.selectedSecond = AF.checkForClick(mouseX, mouseY);
+    AF_LytleJunction.selectedSecond = AF_LytleJunction.checkForClick(mouseX, mouseY);
+    DeFrancesco_South.selectedSecond = DeFrancesco_South.checkForClick(mouseX, mouseY);
+    DeFrancesco_East.selectedSecond = DeFrancesco_East.checkForClick(mouseX, mouseY);
+    DeFrancesco_North.selectedSecond = DeFrancesco_North.checkForClick(mouseX, mouseY);
+    DeFran_LibJunction.selectedSecond = DeFran_LibJunction.checkForClick(mouseX, mouseY);
+    Grim.selectedSecond = Grim.checkForClick(mouseX, mouseY);
+    Grim_BoehmJunction.selectedSecond = Grim_BoehmJunction.checkForClick(mouseX, mouseY);
+    Boehm_Front.selectedSecond = Boehm_Front.checkForClick(mouseX, mouseY);
+    Lytle_DeFranJunction.selectedSecond = Lytle_DeFranJunction.checkForClick(mouseX, mouseY);
+    LibraryFront.selectedSecond = LibraryFront.checkForClick(mouseX, mouseY);
+    Sub_BoehmJunction.selectedSecond = Sub_BoehmJunction.checkForClick(mouseX, mouseY);
+    BoehmRear.selectedSecond = BoehmRear.checkForClick(mouseX, mouseY);
+    SharadinFront.selectedSecond = SharadinFront.checkForClick(mouseX, mouseY);
+    Sub_Front.selectedSecond = Sub_Front.checkForClick(mouseX, mouseY);
+    Sharadin_SubJunction.selectedSecond = Sharadin_SubJunction.checkForClick(mouseX, mouseY);
+    LytleFrontLot.selectedSecond = LytleFrontLot.checkForClick(mouseX, mouseY);
+    BeekeyFront.selectedSecond = BeekeyFront.checkForClick(mouseX, mouseY);
+    Beekey_DeFranJunction.selectedSecond = Beekey_DeFranJunction.checkForClick(mouseX, mouseY);
+    DeFran_RickenbachJunction.selectedSecond = DeFran_RickenbachJunction.checkForClick(mouseX, mouseY);
+    RickenbachFront.selectedSecond = RickenbachFront.checkForClick(mouseX, mouseY);
+    A2.selectedSecond = A2.checkForClick(mouseX, mouseY);
+    DeFrancesco_EastJunction.selectedSecond = DeFrancesco_EastJunction.checkForClick(mouseX, mouseY);
+    Library_Sub_SharadinJunction.selectedSecond = Library_Sub_SharadinJunction.checkForClick(mouseX, mouseY);
+    BoehmSteps.selectedSecond = BoehmSteps.checkForClick(mouseX, mouseY);
+    GrimPond.selectedSecond = GrimPond.checkForClick(mouseX, mouseY);
+
+    for (i = 0; i < vertices.length; i++) {
+      if (vertices[i].selectedSecond) {
+        selectedSecond = vertices[i];
+      }
+    }
+
+    if (selectedFirst == selectedSecond) {
+      selectedSecond = null;
+    }
+  }
+  // End second click block
+
+  print(selectedFirst);
+  print(selectedSecond);
+
 }
 
 // Draw each of the points onto the image
@@ -184,4 +285,9 @@ function drawPoints() {
   Beekey_DeFranJunction.draw();
   DeFran_RickenbachJunction.draw();
   RickenbachFront.draw();
+  A2.draw();
+  DeFrancesco_EastJunction.draw();
+  Library_Sub_SharadinJunction.draw();
+  BoehmSteps.draw();
+  GrimPond.draw();
 }
