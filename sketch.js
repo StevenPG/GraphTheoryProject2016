@@ -2,8 +2,30 @@ function setup() {
 
   // Create the canvas to be drawn on
   createCanvas(windowWidth, windowHeight);
-  print(windowWidth);
-  print(windowHeight);
+/**
+  if(windowWidth < 490){
+    w = 480;
+    h = 270;
+  } else if(windowWidth < 641){
+    w = 640;
+    h = 360;
+  } else if(windowWidth < 750){
+    w = 720;
+    h = 405;
+  } else if(windowWidth < 1441){
+    w = 1440;
+    h = 810;
+  } else if(windowWidth < 1921){
+    w = 1920;
+    h = 1081;
+  } else if(windowWidth < 2049){
+    w = 2048;
+    h = 1152;
+  } else {
+    w = windowWidth;
+    h = windowHeight;
+  }**/
+
   w = windowWidth;
   h = windowHeight;
 
@@ -117,14 +139,13 @@ function setup() {
   DeFran_RickenbachJunction.addAdjacent(RickenbachFront);
   DeFran_RickenbachJunction.addAdjacent(DeFran_LibJunction);
   DeFran_RickenbachJunction.addAdjacent(Sub_Front);
-  DeFran_RickenbachJunction.addAdjacent(DeFrancesco_East);
 
   DeFrancesco_East.addAdjacent(Sub_Front);
 }
 
 function draw() {
   // Draw the background image as the lowest layer on each draw frame
-  image(backgroundImage, 0, 0, width, height);
+  image(backgroundImage, 0, 0, w, h);
 
   // Draw the vertices
   drawPoints();
@@ -133,7 +154,7 @@ function draw() {
 // Runs on button presss
 function runDijkstraAlgorithm() {
   print("Run Dijkstra algorithm");
-  algorithm = new Dijkstra(vertices, false);
+  algorithm = new Dijkstra(vertices, true);
   algorithm.findShortestPath(LytleHall, SharadinFront);
 }
 

@@ -65,6 +65,7 @@ function Dijkstra(listOfVertices, debug) {
     //    2
     //    3      create vertex set Q
     Q = []
+    prev = []
       //    4
       //    5      for each vertex v in Graph:             // Initialization
     for (var i = 0; i < listOfVertices.length; i++) {
@@ -105,12 +106,12 @@ function Dijkstra(listOfVertices, debug) {
           vertex.touched = true;
           alt = vertex.distance + edgeWeight;
           //   18              if alt < dist[v]:               // A shorter path to v has been found
-          if (alt < neighborList[i].distance) {}
-          //   19                  dist[v] ← alt
-          neighborList[i].distance = alt;
-          //   20                  prev[v] ← u
-          neighborList[i].previous = vertex;
-
+          if (alt < neighborList[i].distance) {
+            //   19                  dist[v] ← alt
+            neighborList[i].distance = alt;
+            //   20                  prev[v] ← u
+            neighborList[i].previous = vertex;
+          }
           if (neighborList[i].name === end.name) {
             return;
           }

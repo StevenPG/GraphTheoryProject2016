@@ -66,7 +66,7 @@ function Vertex(name, x, y, size) {
       if (this.previous != null) {
         var adj = this.previous;
         stroke(0, 255, 0);
-        strokeWeight(2);
+        strokeWeight(4);
         line(this.x, this.y, adj.x, adj.y);
       }
     } else {
