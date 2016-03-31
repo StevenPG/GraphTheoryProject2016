@@ -59,20 +59,20 @@ function Vertex(name, x, y, size) {
 
     if (this.selectedFirst) {
       textSize(24);
-      text(this.name, 60, 60);
+      text(this.name, w / 15.48333333333333, h / 14.18333333333333);
     }
 
-    if(this.selectedSecond){
+    if (this.selectedSecond) {
       textSize(24);
-      text(this.name, 60, 90);
+      text(this.name, w / 15.48333333333333, h / 7.97777777777778);
     }
 
     // If mouseover display name
     if (mouseX > this.x - this.size && mouseY < this.y + this.size &&
-      mouseX < this.x + this.size && mouseY > this.y - this.size){
-        textSize(24);
-        text("Test " + this.name, 60, 150);
-      }
+      mouseX < this.x + this.size && mouseY > this.y - this.size) {
+      textSize(24);
+      text("Test " + this.name, w / 15.48333333333333, h / 4.786666666666667);
+    }
 
     fill('white');
     ellipse(this.x, this.y, this.size, this.size);

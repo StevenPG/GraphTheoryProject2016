@@ -168,7 +168,7 @@ function draw() {
 
   // Draw path length
   textSize(24);
-  text(shortestPath, 60, 120);
+  text(shortestPath, w / 15.48333333333333, h / 5.983333333333333);
 
   // Draw the vertices
   drawPoints();
