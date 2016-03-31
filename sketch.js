@@ -216,7 +216,7 @@ function clearSecond() {
 function runDijkstraAlgorithm() {
   if (selectedFirst == null || selectedSecond == null) {
     print("Need to select nodes");
-  } else {
+  } else if(!done){
     print("Run Dijkstra algorithm");
     algorithm = new Dijkstra(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
@@ -228,7 +228,7 @@ function runDijkstraAlgorithm() {
 function runAstarAlgorithm() {
   if (selectedFirst == null || selectedSecond == null) {
     print("Need to select nodes");
-  } else {
+  } else if(!done){
     algorithm = new Astar(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
     shortestPath = algorithm.shortestPathValue;
