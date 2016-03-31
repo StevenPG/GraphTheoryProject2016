@@ -42,6 +42,9 @@ function setup() {
   selectedFirst = null;
   selectedSecond = null;
 
+  // Remove user input
+  done = false;
+
   // Hold all vertices
   vertices = [];
 
@@ -56,6 +59,14 @@ function setup() {
   AstarButton = createButton("A* Algorithm");
   AstarButton.position(w / 1.626970227670753, h / 1.084592145015106);
   AstarButton.mousePressed(runAstarAlgorithm);
+
+  ClearButtonOne = createButton("Clear 1");
+  ClearButtonOne.position(w / 2.5, h / 18);
+  ClearButtonOne.mousePressed(clearFirst);
+
+  ClearButtonTwo = createButton("Clear 2");
+  ClearButtonTwo.position(w / 2.5, h / 10);
+  ClearButtonTwo.mousePressed(clearSecond);
 
   // Assign adjacentVertices
   LytleHall = new Vertex("LytleHall", w / 4.96551724137931, h / 1.222429906542056, vertexSize);
@@ -166,6 +177,12 @@ function draw() {
   rect(w / 22.65853658536585, h / 22.4375,
     w / 2.206650831653919, h / 5.358208955223881);
 
+  // Draw clear buttons in box
+  if (done) {
+    ClearButtonOne.mousePressed(doNothing);
+    ClearButtonTwo.mousePressed(doNothing);
+  }
+
   // Draw path length
   if (shortestPath != 0) {
     textSize(24);
@@ -177,6 +194,24 @@ function draw() {
   drawPoints();
 }
 
+function doNothing() {
+  // Do nothing
+}
+
+// Clear first selected
+function clearFirst() {
+  if (!done) {
+    selectedFirst = null;
+  }
+}
+
+// Clear second selected
+function clearSecond() {
+  if (!done) {
+    selectedSecond = null;
+  }
+}
+
 // Runs on button presss
 function runDijkstraAlgorithm() {
   if (selectedFirst == null || selectedSecond == null) {
@@ -186,6 +221,7 @@ function runDijkstraAlgorithm() {
     algorithm = new Dijkstra(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
     shortestPath = algorithm.shortestPathValue;
+    done = true;
   }
 }
 
@@ -196,6 +232,7 @@ function runAstarAlgorithm() {
     algorithm = new Astar(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
     shortestPath = algorithm.shortestPathValue;
+    done = true;
   }
 }
 
