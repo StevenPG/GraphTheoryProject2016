@@ -71,7 +71,7 @@ function Vertex(name, x, y, size) {
     if (mouseX > this.x - this.size && mouseY < this.y + this.size &&
       mouseX < this.x + this.size && mouseY > this.y - this.size) {
       textSize(24);
-      text("Test " + this.name, w / 15.48333333333333, h / 4.786666666666667);
+      text("Click to Select: " + this.name, w / 15.48333333333333, h / 4.786666666666667);
     }
 
     fill('white');
