@@ -24,6 +24,7 @@ function Astar(listOfVertices, debug) {
       // current := cameFrom[current]
       current.lit = true;
       current = current.previous;
+      current.lit = true;
       // total_path.append(current)
       total_path.push(current);
     }
