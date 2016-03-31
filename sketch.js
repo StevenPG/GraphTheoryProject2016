@@ -44,6 +44,8 @@ function setup() {
 
   // Remove user input
   done = false;
+  usedDijkstra = false;
+  usedAstar = false;
 
   // Hold all vertices
   vertices = [];
@@ -183,6 +185,18 @@ function draw() {
     ClearButtonTwo.mousePressed(doNothing);
   }
 
+  if (usedAstar) {
+    textSize(24);
+    fill('blue');
+    text("Used A* Algorithm", w / 15.48333333333333, h / 4.5);
+  }
+
+  if (usedDijkstra) {
+    textSize(24);
+    fill('blue');
+    text("Used Dijkstra's Algorithm", w / 15.48333333333333, h / 4.5);
+  }
+
   // Draw path length
   if (shortestPath != 0) {
     textSize(24);
@@ -216,23 +230,25 @@ function clearSecond() {
 function runDijkstraAlgorithm() {
   if (selectedFirst == null || selectedSecond == null) {
     print("Need to select nodes");
-  } else if(!done){
+  } else if (!done) {
     print("Run Dijkstra algorithm");
     algorithm = new Dijkstra(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
     shortestPath = algorithm.shortestPathValue;
     done = true;
+    usedDijkstra = true;
   }
 }
 
 function runAstarAlgorithm() {
   if (selectedFirst == null || selectedSecond == null) {
     print("Need to select nodes");
-  } else if(!done){
+  } else if (!done) {
     algorithm = new Astar(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
     shortestPath = algorithm.shortestPathValue;
     done = true;
+    usedAstar = true;
   }
 }
 
