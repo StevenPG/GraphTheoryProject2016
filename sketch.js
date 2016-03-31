@@ -45,13 +45,16 @@ function setup() {
   // Hold all vertices
   vertices = [];
 
+  // Display shortest path
+  shortestPath = 0;
+
   // Create buttons
   DijkstraButton = createButton("Dijkstra's Algorithm");
-  DijkstraButton.position(w / 1.107692308692308, h / 1.091666666666667);
+  DijkstraButton.position(w / 1.626970227670753, h / 1.159935379644588);
   DijkstraButton.mousePressed(runDijkstraAlgorithm);
 
   AstarButton = createButton("A* Algorithm");
-  AstarButton.position(w / 2, h / 2);
+  AstarButton.position(w / 1.626970227670753, h / 1.084592145015106);
   AstarButton.mousePressed(runAstarAlgorithm);
 
   // Assign adjacentVertices
@@ -159,6 +162,14 @@ function draw() {
   // Draw the background image as the lowest layer on each draw frame
   image(backgroundImage, 0, 0, w, h);
 
+  // Draw infobox
+  rect(w / 22.65853658536585, h / 22.4375,
+    w / 2.206650831653919, h / 5.358208955223881);
+
+  // Draw path length
+  textSize(24);
+  text(shortestPath, 60, 120);
+
   // Draw the vertices
   drawPoints();
 }
@@ -171,6 +182,7 @@ function runDijkstraAlgorithm() {
     print("Run Dijkstra algorithm");
     algorithm = new Dijkstra(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
+    shortestPath = algorithm.shortestPathValue;
   }
 }
 
@@ -180,6 +192,7 @@ function runAstarAlgorithm() {
   } else {
     algorithm = new Astar(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
+    shortestPath = algorithm.shortestPathValue;
   }
 }
 
@@ -219,6 +232,7 @@ function mouseClicked() {
     for (i = 0; i < vertices.length; i++) {
       if (vertices[i].selectedFirst) {
         selectedFirst = vertices[i];
+        return;
       }
     }
   }
@@ -275,32 +289,32 @@ function mouseClicked() {
 // Draw each of the points onto the image
 function drawPoints() {
   // Draw points
-  LytleHall.draw();
-  LytleJunction.draw();
-  AF.draw();
-  AF_LytleJunction.draw();
-  DeFrancesco_South.draw();
-  DeFrancesco_East.draw();
-  DeFrancesco_North.draw();
-  DeFran_LibJunction.draw();
-  Grim.draw();
-  Grim_BoehmJunction.draw();
-  Boehm_Front.draw();
-  Lytle_DeFranJunction.draw();
-  LibraryFront.draw();
-  Sub_BoehmJunction.draw();
-  BoehmRear.draw();
-  SharadinFront.draw();
-  Sub_Front.draw();
-  Sharadin_SubJunction.draw();
-  LytleFrontLot.draw();
-  BeekeyFront.draw();
-  Beekey_DeFranJunction.draw();
-  DeFran_RickenbachJunction.draw();
-  RickenbachFront.draw();
-  A2.draw();
-  DeFrancesco_EastJunction.draw();
-  Library_Sub_SharadinJunction.draw();
-  BoehmSteps.draw();
-  GrimPond.draw();
+  LytleHall.draw(mouseX, mouseY);
+  LytleJunction.draw(mouseX, mouseY);
+  AF.draw(mouseX, mouseY);
+  AF_LytleJunction.draw(mouseX, mouseY);
+  DeFrancesco_South.draw(mouseX, mouseY);
+  DeFrancesco_East.draw(mouseX, mouseY);
+  DeFrancesco_North.draw(mouseX, mouseY);
+  DeFran_LibJunction.draw(mouseX, mouseY);
+  Grim.draw(mouseX, mouseY);
+  Grim_BoehmJunction.draw(mouseX, mouseY);
+  Boehm_Front.draw(mouseX, mouseY);
+  Lytle_DeFranJunction.draw(mouseX, mouseY);
+  LibraryFront.draw(mouseX, mouseY);
+  Sub_BoehmJunction.draw(mouseX, mouseY);
+  BoehmRear.draw(mouseX, mouseY);
+  SharadinFront.draw(mouseX, mouseY);
+  Sub_Front.draw(mouseX, mouseY);
+  Sharadin_SubJunction.draw(mouseX, mouseY);
+  LytleFrontLot.draw(mouseX, mouseY);
+  BeekeyFront.draw(mouseX, mouseY);
+  Beekey_DeFranJunction.draw(mouseX, mouseY);
+  DeFran_RickenbachJunction.draw(mouseX, mouseY);
+  RickenbachFront.draw(mouseX, mouseY);
+  A2.draw(mouseX, mouseY);
+  DeFrancesco_EastJunction.draw(mouseX, mouseY);
+  Library_Sub_SharadinJunction.draw(mouseX, mouseY);
+  BoehmSteps.draw(mouseX, mouseY);
+  GrimPond.draw(mouseX, mouseY);
 }

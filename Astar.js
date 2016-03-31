@@ -8,6 +8,8 @@ function Astar(listOfVertices, debug) {
 
   this.debug = debug;
 
+  this.shortestPathValue = 0;
+
   // Constructor, save the entire list of vertices
   {
     this.vertices = listOfVertices;
@@ -35,6 +37,7 @@ function Astar(listOfVertices, debug) {
         }
       }
       print(totalDistance);
+      this.shortestPathValue = totalDistance;
     }
     // return total_path
     return total_path;

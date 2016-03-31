@@ -55,15 +55,24 @@ function Vertex(name, x, y, size) {
     this.edgeList.push(edge);
   }
 
-  this.draw = function() {
+  this.draw = function(mouseX, mouseY) {
 
     if (this.selectedFirst) {
-      text(this.name, w / 1.048035, h / 1.329435);
+      textSize(24);
+      text(this.name, 60, 60);
     }
 
     if(this.selectedSecond){
-      text(this.name, w/1.041968, h/1.270019);
+      textSize(24);
+      text(this.name, 60, 90);
     }
+
+    // If mouseover display name
+    if (mouseX > this.x - this.size && mouseY < this.y + this.size &&
+      mouseX < this.x + this.size && mouseY > this.y - this.size){
+        textSize(24);
+        text("Test " + this.name, 60, 150);
+      }
 
     fill('white');
     ellipse(this.x, this.y, this.size, this.size);

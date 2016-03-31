@@ -8,6 +8,8 @@ function Dijkstra(listOfVertices, debug) {
 
   this.debug = debug;
 
+  this.shortestPathValue = 0;
+
   // Constructor, save the entire list of vertices
   {
     this.vertices = listOfVertices;
@@ -31,6 +33,7 @@ function Dijkstra(listOfVertices, debug) {
         pathLength += shortestPathList[i].distance;
       }
       print("Path length: " + pathLength);
+      this.shortestPathValue = pathLength;
     }
   }
 
