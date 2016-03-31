@@ -23,6 +23,9 @@ function Vertex(name, x, y, size) {
   // Host the previous node in the list
   this.previous;
 
+  // Fscore for A*
+  this.fscore;
+
   // Constructor
   {
     this.x = x;

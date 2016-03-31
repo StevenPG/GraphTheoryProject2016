@@ -50,6 +50,10 @@ function setup() {
   DijkstraButton.position(w / 1.107692308692308, h / 1.091666666666667);
   DijkstraButton.mousePressed(runDijkstraAlgorithm);
 
+  AstarButton = createButton("A* Algorithm");
+  AstarButton.position(w / 2, h / 2);
+  AstarButton.mousePressed(runAstarAlgorithm);
+
   // Assign adjacentVertices
   LytleHall = new Vertex("LytleHall", w / 4.96551724137931, h / 1.222429906542056, vertexSize);
   LytleJunction = new Vertex("LytleJunction", w / 4.96551724137931, h / 1.33469387755102, vertexSize);
@@ -165,7 +169,16 @@ function runDijkstraAlgorithm() {
     print("Need to select nodes");
   } else {
     print("Run Dijkstra algorithm");
-    algorithm = new Dijkstra(vertices, false);
+    algorithm = new Dijkstra(vertices, true);
+    algorithm.findShortestPath(selectedFirst, selectedSecond);
+  }
+}
+
+function runAstarAlgorithm() {
+  if (selectedFirst == null || selectedSecond == null) {
+    print("Need to select nodes");
+  } else {
+    algorithm = new Astar(vertices, true);
     algorithm.findShortestPath(selectedFirst, selectedSecond);
   }
 }
