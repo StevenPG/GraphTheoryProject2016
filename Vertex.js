@@ -56,14 +56,15 @@ function Vertex(name, x, y, size) {
   }
 
   this.draw = function(mouseX, mouseY) {
-
     if (this.selectedFirst) {
       textSize(24);
-      text(this.name, w / 15.48333333333333, h / 14.18333333333333);
+      fill('blue');
+      text(this.name, w / 15.48333333333333, h / 13.18333333333333);
     }
 
     if (this.selectedSecond) {
       textSize(24);
+      fill('orange');
       text(this.name, w / 15.48333333333333, h / 7.97777777777778);
     }
 
@@ -71,11 +72,12 @@ function Vertex(name, x, y, size) {
     if (mouseX > this.x - this.size && mouseY < this.y + this.size &&
       mouseX < this.x + this.size && mouseY > this.y - this.size) {
       textSize(24);
-      text("Click to Select: " + this.name, w / 15.48333333333333, h / 4.786666666666667);
+      fill(255);
+      //text("Click to Select: " + this.name, w / 15.48333333333333, h / 4.786666666666667);
+      text(this.name, mouseX + 15, mouseY);
     }
 
     fill('white');
-    ellipse(this.x, this.y, this.size, this.size);
     for (i = 0; i < this.adjacentVertices.length; i++) {
       var adj = this.adjacentVertices[i];
       stroke(255);
@@ -83,19 +85,34 @@ function Vertex(name, x, y, size) {
       line(this.x, this.y, adj.x, adj.y);
     }
 
-
     if (this.lit) {
-      fill('green');
-      ellipse(this.x, this.y, this.size, this.size);
+      if (this.selectedFirst) {
+        fill('blue');
+        ellipse(this.x, this.y, this.size + 10, this.size + 10);
+      } else if (this.selectedSecond) {
+        fill('orange');
+        ellipse(this.x, this.y, this.size + 10, this.size + 10);
+      } else {
+        fill('green');
+        ellipse(this.x, this.y, this.size + 10, this.size + 10);
+      }
       if (this.previous != null) {
         var adj = this.previous;
         stroke(0, 255, 0);
         strokeWeight(4);
         line(this.x, this.y, adj.x, adj.y);
       }
-    } else {
-      fill('red');
-      ellipse(this.x, this.y, this.size, this.size);
+    } else if (!this.lit) {
+      if (this.selectedFirst) {
+        fill('blue');
+        ellipse(this.x, this.y, this.size + 10, this.size + 10);
+      } else if (this.selectedSecond) {
+        fill('orange');
+        ellipse(this.x, this.y, this.size + 10, this.size + 10);
+      } else {
+        fill('red');
+        ellipse(this.x, this.y, this.size, this.size);
+      }
     }
 
   }

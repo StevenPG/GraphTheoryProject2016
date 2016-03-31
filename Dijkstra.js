@@ -53,6 +53,9 @@ function Dijkstra(listOfVertices, debug) {
       print(endNode.name);
       endNode.lit = true;
       endNode = endNode.previous;
+      if(endNode != null){
+        endNode.lit = true;
+      }
     }
 
     print(endNode.name);

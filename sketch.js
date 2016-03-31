@@ -167,8 +167,11 @@ function draw() {
     w / 2.206650831653919, h / 5.358208955223881);
 
   // Draw path length
-  textSize(24);
-  text(shortestPath, w / 15.48333333333333, h / 5.983333333333333);
+  if (shortestPath != 0) {
+    textSize(24);
+    fill(0);
+    text(Math.round(shortestPath) + " arbitrary units", w / 15.48333333333333, h / 5.983333333333333);
+  }
 
   // Draw the vertices
   drawPoints();
