@@ -99,6 +99,14 @@ function setup() {
   Library_Sub_SharadinJunction = new Vertex("Library_Sub_SharadinJunction", w / 3.044397, h / 1.905028, vertexSize);
   BoehmSteps = new Vertex("BoehmSteps", w / 2.823529, h / 1.485839, vertexSize);
   GrimPond = new Vertex("GrimPond", w / 2.818004, h / 1.394683, vertexSize);
+  GrimBLot = new Vertex("GrimBLot", w / 2.598086124, h / 1.345238095, vertexSize);
+  GrimBLot_BoehmJunction = new Vertex("GrimBLot_BoehmJunction", w / 2.721804511, h / 1.473913043, vertexSize);
+  NorthCampusDrive = new Vertex("NorthCampusDrive", w / 2.440449438, h / 1.49010989, vertexSize);
+  Boehm_SchaefferJunction = new Vertex("Boehm_SchaefferJunction", w / 2.721804511, h / 1.77486911, vertexSize);
+  Schaeffer_NCampJunction = new Vertex("Schaeffer_NCampJunction", w / 2.525581395, h / 1.74742268, vertexSize);
+  Ncamp_SharadinJunction = new Vertex("Ncamp_SharadinJunction", w / 2.591885442, h / 2.166134185, vertexSize);
+  Schaeffer_OldMainJunction = new Vertex("Schaeffer_OldMainJunction", w / 2.198380567, h / 1.959537572, vertexSize);
+
 
   // Build vertex list
   vertices.push(LytleHall);
@@ -125,10 +133,18 @@ function setup() {
   vertices.push(DeFran_RickenbachJunction);
   vertices.push(RickenbachFront);
   vertices.push(A2);
-  vertices.push(DeFrancesco_EastJunction)
-  vertices.push(Library_Sub_SharadinJunction)
-  vertices.push(BoehmSteps)
-  vertices.push(GrimPond)
+  vertices.push(DeFrancesco_EastJunction);
+  vertices.push(Library_Sub_SharadinJunction);
+  vertices.push(BoehmSteps);
+  vertices.push(GrimPond);
+  vertices.push(GrimBLot);
+  vertices.push(GrimBLot_BoehmJunction);
+  vertices.push(NorthCampusDrive);
+  vertices.push(Boehm_SchaefferJunction);
+  vertices.push(Schaeffer_NCampJunction);
+  vertices.push(Ncamp_SharadinJunction);
+  vertices.push(Schaeffer_OldMainJunction);
+
 
   // Build adjacentVertices (Goes both ways)
   LytleHall.addAdjacent(LytleJunction);
@@ -169,6 +185,20 @@ function setup() {
   Grim_BoehmJunction.addAdjacent(GrimPond);
   GrimPond.addAdjacent(Grim);
   A2.addAdjacent(DeFrancesco_North);
+  Grim.addAdjacent(GrimBLot);
+  GrimBLot.addAdjacent(GrimBLot_BoehmJunction);
+  BoehmSteps.addAdjacent(GrimBLot_BoehmJunction);
+  GrimBLot_BoehmJunction.addAdjacent(NorthCampusDrive);
+  NorthCampusDrive.addAdjacent(GrimBLot);
+  NorthCampusDrive.addAdjacent(Schaeffer_NCampJunction);
+  Schaeffer_NCampJunction.addAdjacent(Schaeffer_OldMainJunction);
+  Schaeffer_OldMainJunction.addAdjacent(Ncamp_SharadinJunction);
+  Ncamp_SharadinJunction.addAdjacent(SharadinFront);
+  Schaeffer_NCampJunction.addAdjacent(SharadinFront);
+  Boehm_SchaefferJunction.addAdjacent(Schaeffer_NCampJunction);
+  Boehm_SchaefferJunction.addAdjacent(BoehmRear);
+  Boehm_SchaefferJunction.addAdjacent(Sub_BoehmJunction);
+
 }
 
 function draw() {
@@ -284,6 +314,13 @@ function mouseClicked() {
     Library_Sub_SharadinJunction.selectedFirst = Library_Sub_SharadinJunction.checkForClick(mouseX, mouseY);
     BoehmSteps.selectedFirst = BoehmSteps.checkForClick(mouseX, mouseY);
     GrimPond.selectedFirst = GrimPond.checkForClick(mouseX, mouseY);
+    GrimBLot.selectedFirst = GrimBLot.checkForClick(mouseX, mouseY);
+    GrimBLot_BoehmJunction.selectedFirst = GrimBLot_BoehmJunction.checkForClick(mouseX, mouseY);
+    NorthCampusDrive.selectedFirst = NorthCampusDrive.checkForClick(mouseX, mouseY);
+    Boehm_SchaefferJunction.selectedFirst = Boehm_SchaefferJunction.checkForClick(mouseX, mouseY);
+    Schaeffer_NCampJunction.selectedFirst = Schaeffer_NCampJunction.checkForClick(mouseX, mouseY);
+    Ncamp_SharadinJunction.selectedFirst = Ncamp_SharadinJunction.checkForClick(mouseX, mouseY);
+    Schaeffer_OldMainJunction.selectedFirst = Schaeffer_OldMainJunction.checkForClick(mouseX, mouseY);
 
     for (i = 0; i < vertices.length; i++) {
       if (vertices[i].selectedFirst) {
@@ -324,6 +361,13 @@ function mouseClicked() {
     Library_Sub_SharadinJunction.selectedSecond = Library_Sub_SharadinJunction.checkForClick(mouseX, mouseY);
     BoehmSteps.selectedSecond = BoehmSteps.checkForClick(mouseX, mouseY);
     GrimPond.selectedSecond = GrimPond.checkForClick(mouseX, mouseY);
+    GrimBLot.selectedSecond = GrimBLot.checkForClick(mouseX, mouseY);
+    GrimBLot_BoehmJunction.selectedSecond = GrimBLot_BoehmJunction.checkForClick(mouseX, mouseY);
+    NorthCampusDrive.selectedSecond = NorthCampusDrive.checkForClick(mouseX, mouseY);
+    Boehm_SchaefferJunction.selectedSecond = Boehm_SchaefferJunction.checkForClick(mouseX, mouseY);
+    Schaeffer_NCampJunction.selectedSecond = Schaeffer_NCampJunction.checkForClick(mouseX, mouseY);
+    Ncamp_SharadinJunction.selectedSecond = Ncamp_SharadinJunction.checkForClick(mouseX, mouseY);
+    Schaeffer_OldMainJunction.selectedSecond = Schaeffer_OldMainJunction.checkForClick(mouseX, mouseY);
 
     for (i = 0; i < vertices.length; i++) {
       if (vertices[i].selectedSecond) {
@@ -373,4 +417,11 @@ function drawPoints() {
   Library_Sub_SharadinJunction.draw(mouseX, mouseY);
   BoehmSteps.draw(mouseX, mouseY);
   GrimPond.draw(mouseX, mouseY);
+  GrimBLot.draw(mouseX, mouseY);
+  GrimBLot_BoehmJunction.draw(mouseX, mouseY);
+  NorthCampusDrive.draw(mouseX, mouseY);
+  Boehm_SchaefferJunction.draw(mouseX, mouseY);
+  Schaeffer_NCampJunction.draw(mouseX, mouseY);
+  Ncamp_SharadinJunction.draw(mouseX, mouseY);
+  Schaeffer_OldMainJunction.draw(mouseX, mouseY);
 }
