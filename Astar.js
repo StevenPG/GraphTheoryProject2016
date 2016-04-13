@@ -82,7 +82,6 @@ function Astar(listOfVertices, debug) {
       }
 
       // // For the first node, that value is completely heuristic.
-      // fScore[start] := heuristic_cost_estimate(start, goal)
       var x = start.x - goal.x;
       var y = start.y - goal.y;
       var edgeWeight = Math.sqrt(x * x + y * y);
