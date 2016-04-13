@@ -3,6 +3,14 @@
  * Date: 3/31/16
  * This file contains a javascript implementation
  * of the A* pathfinding algorithm.
+ *
+ * There is one extremely confusing and notable bug. When going from
+ * the southwest of the graph to the northwest, Astar tends to take a
+ * terrible path around everything. I have no clue why this happens.
+ *
+ * I have found out that I am over-estimating and therefore making the
+ * the algorithm inadmissible. I am going to keep it this way however,
+ * that way to display that when over-estimating, one loses the shortest path.
  **/
 function Astar(listOfVertices, debug) {
 
@@ -82,9 +90,11 @@ function Astar(listOfVertices, debug) {
       }
 
       // // For the first node, that value is completely heuristic.
-      var x = start.x - goal.x;
-      var y = start.y - goal.y;
-      var edgeWeight = Math.sqrt(x * x + y * y);
+      // Math.sqrt takes square root of parameter
+      // Math.pow returns value of param 1 taken to power of param 2
+      var x = Math.pow(goal.x - start.x, 2);
+      var y = Math.pow(goal.y - start.y, 2);
+      var edgeWeight = Math.sqrt(x + y);
       for (var i = 0; i < this.vertices.length; i++) {
         if (this.vertices[i].name == start.name) {
           // gScore[start] := 0
@@ -147,12 +157,12 @@ function Astar(listOfVertices, debug) {
           }
 
           //
-          // This path is the best until now. Record it!
-          //         cameFrom[neighbor] := current
+          // This path is the best up until now. Record it Here!!!!
+          //         Set the previous node to the current node
           current.adjacentVertices[i].previous = current;
-          //         gScore[neighbor] := tentative_gScore
+          //         Set the distance so far to the tentative_gScore
           current.adjacentVertices[i].distance = tentative_gScore;
-          //         fScore[neighbor] := gScore[neighbor] + heuristic_cost_estimate(neighbor, goal)
+          //         Set the heuristic distance to the current full distance
           current.adjacentVertices[i].fscore = current.adjacentVertices[i].distance;
         }
       }
