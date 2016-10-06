@@ -4,7 +4,7 @@
  * This file contains an object that contains the distance between two vertices.
  **/
 function Edge(vertexA, vertexB, weight) {
-  // Constructor
+  //Default Constructor
   {
     this.vertexAName = vertexA.name;
     this.vertexA = vertexA;
